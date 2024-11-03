@@ -28,7 +28,7 @@ git clone https://github.com/iamGudfred/Portfolio-Website.git
 
 ## 🌐 Live Demo
 
-Visit the live website: [Godfred Prebbie Mensah Portfolio](https://iamgudfred.github.io/Portfolio-Website)
+Visit the live website: [Godfred Prebbie Mensah Portfolio](https://iamgudfred.github.io/)
 
 ## 📱 Connect With Me
 
