@@ -131,7 +131,6 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #6e48aa, #9b59b6);
 }
 
 .hero-content {
@@ -511,6 +510,12 @@ h2 {
   object-fit: cover;
   margin: 0 auto 20px;
   display: block;
+  filter: grayscale(100%); /* Makes the image black and white */
+  transition: filter 0.3s ease; /* Smooth transition for the color change */
+}
+
+.profile-img:hover {
+  filter: grayscale(0%); /* Removes the black and white filter on hover */
 }
 
 /* Footer */
