@@ -36,6 +36,10 @@ body {
   animation: gradient 15s ease infinite;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 /* Layout */
 .container {
   max-width: 1400px;
@@ -53,9 +57,15 @@ h2 {
   font-size: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: clamp(2rem, 4vw, 4rem);
   font-weight: 700;
-  text-align: center; /* Center all h2 headings */
+  text-align: center;
   width: 100%;
   padding: 0 var(--container-padding);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
 /* Navigation */
@@ -64,12 +74,15 @@ h2 {
   top: 0;
   left: 0;
   width: 100%;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1000;
-  padding: 10px 20px;
+  padding: 15px 20px; /* Increased top/bottom padding from 10px to 15px */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 70px; /* Ensures navbar accommodates larger logo */
 }
 
 .nav-container {
@@ -82,8 +95,17 @@ h2 {
 }
 
 .logo {
-  font-size: 24px;
-  color: white;
+    display: flex;
+    align-items: center;
+    max-height: 60px; /* Caps logo container height */
+    overflow: hidden; /* Prevents logo from overflowing */
+}
+.logo-img {
+    height: 60px; /* Desktop logo height */
+    width: auto;
+    max-width: 100%; /* Ensures logo doesn’t exceed container width */
+    object-fit: contain; /* Preserves aspect ratio */
+    vertical-align: middle;
 }
 
 .nav-links {
@@ -97,8 +119,8 @@ h2 {
   text-decoration: none;
   font-size: clamp(1rem, 1.5vw, 1.2rem);
   font-weight: 500;
-  padding: 0.75rem 1.25rem; /* Increased padding */
-  margin: 0 0.25rem; /* Add spacing between links */
+  padding: 0.75rem 1.25rem;
+  margin: 0 0.25rem;
   transition: var(--transition-smooth);
   position: relative;
 }
@@ -116,7 +138,7 @@ h2 {
 
 .nav-links a:hover {
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.1); /* Subtle background on hover */
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
 }
 
@@ -154,7 +176,6 @@ h2 {
 }
 
 /* Buttons */
-
 .cta-buttons {
   display: flex;
   gap: 1.5rem;
@@ -172,7 +193,7 @@ h2 {
   font-size: clamp(1rem, 1.5vw, 1.1rem);
   font-weight: 500;
   transition: var(--transition-smooth);
-  min-width: 180px; /* Ensure consistent width */
+  min-width: 180px;
 }
 
 .btn:hover {
@@ -188,6 +209,117 @@ h2 {
 .secondary {
   border: 2px solid var(--white);
   color: var(--white);
+}
+
+/* Profile Image */
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.profile-img:hover {
+  filter: grayscale(0%);
+}
+
+/* Impact Section */
+.impact {
+  padding: var(--section-spacing) var(--container-padding);
+  text-align: center;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.impact-item {
+  background: var(--glass);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(10px);
+  transition: var(--transition-smooth);
+}
+
+.impact-item i {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--gradient-2);
+}
+
+.impact-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.impact-item p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.impact-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Skills Section */
+.skills {
+  padding: var(--section-spacing) var(--container-padding);
+  text-align: center;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.skill-category {
+  background: var(--glass);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(10px);
+  transition: var(--transition-smooth);
+}
+
+.skill-category h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.skill-category ul {
+  list-style: none;
+  text-align: left;
+}
+
+.skill-category ul li {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.skill-category ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--gradient-2);
+  font-size: 1.2rem;
+}
+
+.skill-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Work Section */
@@ -211,7 +343,7 @@ h2 {
 .work-carousel {
   position: relative;
   width: 100%;
-  margin: 0; /* Remove any margin that might cause overflow */
+  margin: 0;
   height: 600px;
   overflow: hidden;
   border-radius: var(--border-radius);
@@ -371,6 +503,7 @@ h2 {
   backdrop-filter: blur(5px);
   opacity: 0;
   transition: var(--transition-smooth);
+  z-index: 10;
 }
 
 .work-carousel:hover .carousel-nav {
@@ -383,8 +516,13 @@ h2 {
   transform: translateY(-50%) scale(1.1);
 }
 
-.carousel-nav.prev { left: 20px; }
-.carousel-nav.next { right: 20px; }
+.carousel-nav.prev {
+  left: 20px;
+}
+
+.carousel-nav.next {
+  right: 20px;
+}
 
 /* Carousel Indicators */
 .carousel-indicators {
@@ -441,16 +579,36 @@ h2 {
 .media-card i {
   font-size: 3rem;
   margin-bottom: 1.5rem;
+  color: var(--gradient-2);
+}
+
+.media-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.media-card p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
 }
 
 .media-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Writing Section */
 .writing-section {
   padding: var(--section-spacing) var(--container-padding);
   width: 100%;
+}
+
+.writing-intro {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .substack-embed {
@@ -502,22 +660,6 @@ h2 {
   background: var(--glass-hover);
 }
 
-/* Profile Image */
-.profile-img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 20px;
-  display: block;
-  filter: grayscale(100%); /* Makes the image black and white */
-  transition: filter 0.3s ease; /* Smooth transition for the color change */
-}
-
-.profile-img:hover {
-  filter: grayscale(0%); /* Removes the black and white filter on hover */
-}
-
 /* Footer */
 footer {
   text-align: center;
@@ -547,196 +689,265 @@ footer {
 @media (max-width: 768px) {
   /* Navigation */
   .navbar {
-      background: rgba(20, 20, 20, 0.95);
-      padding: 1rem;
+    background: rgba(20, 20, 20, 0.95);
+    padding: 1rem;
+    min-height: 60px; /* Slightly reduced for mobile */
   }
 
   .nav-links {
-      position: fixed;
-      top: 80px;
-      left: 0;
-      right: 0;
-      background: rgba(20, 20, 20, 0.95);
-      padding: 1.5rem;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-      z-index: 99;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: rgba(20, 20, 20, 0.95);
+    padding: 1.5rem;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 99;
   }
 
   .nav-links.active {
-      display: flex;
+    display: flex;
   }
 
   .nav-links a {
-      width: 100%;
-      text-align: center;
-      padding: 1rem;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
   }
+
+    /* Logo */
+  .logo-img {
+    height: 30px; /* Smaller logo for mobile */
+    width: auto;
+}
 
   /* Mobile Menu */
   .mobile-menu {
-      display: block;
-      width: 30px;
-      height: 24px;
-      position: relative;
-      margin-left: auto;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 1000;
+    display: block;
+    width: 30px;
+    height: 24px;
+    position: relative;
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
   }
 
   .mobile-menu span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: var(--white);
-      position: absolute;
-      transition: var(--transition-smooth);
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--white);
+    position: absolute;
+    transition: var(--transition-smooth);
   }
 
   .mobile-menu span:first-child {
-      top: 0;
+    top: 0;
   }
 
   .mobile-menu span:nth-child(2) {
-      top: 50%;
-      transform: translateY(-50%);
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .mobile-menu span:last-child {
-      bottom: 0;
+    bottom: 0;
   }
 
   .mobile-menu.active span:first-child {
-      transform: rotate(45deg) translate(8px, 8px);
+    transform: rotate(45deg) translate(8px, 8px);
   }
 
   .mobile-menu.active span:nth-child(2) {
-      opacity: 0;
+    opacity: 0;
   }
 
   .mobile-menu.active span:last-child {
-      transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(7px, -7px);
   }
 
   /* Hero Section */
   .hero {
-      padding-top: 5rem;
-      text-align: center;
-      min-height: auto;
+    padding-top: 5rem;
+    text-align: center;
+    min-height: auto;
   }
 
   .hero-content {
-      padding: 2rem 1rem;
+    padding: 2rem 1rem;
   }
 
   .hero h1 {
-      padding-top: 4rem;
-      font-size: clamp(2rem, 5vw, 3rem);
+    padding-top: 4rem;
+    font-size: clamp(2rem, 5vw, 3rem);
   }
 
   .cta-buttons {
     flex-direction: column;
-    gap: 1.5rem; /* Increased gap for mobile */
+    gap: 1.5rem;
     margin-top: 2rem;
-    padding: 0 1rem; /* Add some padding on sides */
+    padding: 0 1rem;
   }
 
   .btn {
-      width: 100%;
-      justify-content: center;
-      padding: 1rem;
-      min-height: 3.5rem; /* Ensure consistent height */
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    min-height: 3.5rem;
   }
 
   /* Work Section */
+  .work-section {
+    min-height: auto;
+    padding-bottom: clamp(0.5rem, 1vw, 1rem);
+    margin-bottom: clamp(0.5rem, 1vw, 1rem);
+  }
+
+  .work-showcase {
+    display: flex;
+    justify-content: center;
+    padding: 0; /* Remove padding to align with other sections */
+  }
+
   .work-carousel {
-      height: 500px;
-      margin: 0 1rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto; /* Center the carousel */
+    height: 500px;
   }
 
   .work-card {
-      aspect-ratio: 3/2;
+    aspect-ratio: unset; /* Remove aspect-ratio to allow natural image proportions */
+    height: 500px; /* Match the carousel height */
+  }
+
+  .card-media {
+    position: absolute;
+    inset: 0;
+    height: 100%; /* Ensure it takes full height */
+  }
+
+  .work-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Use contain to fit the image without cropping */
   }
 
   .work-card-content {
-      padding: 1.5rem;
+    padding: 1.5rem;
   }
 
   .carousel-nav {
-      opacity: 1;
-      transform: translateY(-50%) scale(1);
-      width: 40px;
-      height: 40px;
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+    width: 40px;
+    height: 40px;
   }
+
+  /* Media Section */
+  .media-section {
+    padding-top: clamp(0.5rem, 1vw, 1rem);
+    margin-top: clamp(0.5rem, 1vw, 1rem);
+    grid-template-columns: 1fr;
+  }
+
+  /* Impact Section */
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Skills Section */
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Carousel Indicators in Mobile */
+  .carousel-indicators {
+    bottom: 20px;
+    gap: 8px;
+  }
+
+  .carousel-indicator {
+    width: 20px;
+  }
+}
+
+/* Accessibility focus styles */
+.carousel-nav:focus,
+.carousel-indicator:focus {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
 }
 
 /* Smaller screens */
 @media (max-width: 480px) {
   .hero h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
   
   .cta-buttons {
-    gap: 2rem; /* Even more space on smaller screens */
-}
+    gap: 2rem;
+  }
+
   .hero p {
-      font-size: 1rem;
-      margin-bottom: 2rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
   }
 
   .hero-content {
-      padding-top: 6rem;
+    padding-top: 6rem;
   }
 
   .work-carousel {
-      height: 400px;
+    height: 400px;
+  }
+
+  .work-card {
+    height: 400px; /* Match the carousel height */
   }
 
   .work-card h3 {
-      font-size: clamp(1.2rem, 4vw, 1.8rem);
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
   }
 
   .work-card p {
-      font-size: 1rem;
+    font-size: 1rem;
   }
 
   .carousel-nav {
-      width: 35px;
-      height: 35px;
+    width: 35px;
+    height: 35px;
   }
 
   .work-tags span {
-      font-size: 0.7rem;
-      padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
   }
 
   .carousel-indicator {
-      width: 20px;
-  }
-
-  .media-section {
-      grid-template-columns: 1fr;
+    width: 20px;
   }
 }
 
 /* Desktop overrides */
 @media (min-width: 768px) {
   .mobile-menu {
-      display: none;
+    display: none;
   }
 
   .cta-buttons {
-      flex-direction: row;
-      justify-content: flex-start;
-      gap: 1rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1rem;
   }
 
   .nav-links {
-      display: flex !important;
+    display: flex !important;
   }
 }
