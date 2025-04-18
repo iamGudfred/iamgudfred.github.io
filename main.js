@@ -4,18 +4,22 @@ const selectAll = (selector) => document.querySelectorAll(selector);
 
 // Smooth scrolling
 const initSmoothScroll = () => {
-    selectAll('a[href^="#"]').forEach(anchor => {
+    const anchors = selectAll('a[href^="#"]');
+    anchors.forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             e.preventDefault();
-            const target = select(anchor.getAttribute('href'));
+            const targetId = anchor.getAttribute('href');
+            const target = select(targetId);
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth' });
                 // Close mobile menu if open
                 const navLinks = select('.nav-links');
                 const mobileMenu = select('.mobile-menu');
-                if (navLinks?.classList.contains('active')) {
+                if (navLinks && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
-                    mobileMenu?.classList.remove('active');
+                }
+                if (mobileMenu && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
                 }
             }
         });
@@ -25,14 +29,17 @@ const initSmoothScroll = () => {
 // Navbar scroll behavior
 const initNavbar = () => {
     const navbar = select('.navbar');
-    let lastScroll = 0;
+    if (!navbar) return;
 
+    let lastScroll = 0;
     window.addEventListener('scroll', () => {
         const currentScroll = window.scrollY;
         if (currentScroll > 50) {
-            navbar.style.background = 'rgba(30, 30, 30, 0.9)';
+            navbar.style.background = 'rgba(255, 255, 255, 0.2)';
+            navbar.style.backdropFilter = 'blur(10px)';
         } else {
-            navbar.style.background = 'transparent';
+            navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+            navbar.style.backdropFilter = 'blur(10px)';
         }
         lastScroll = currentScroll;
     });
@@ -61,13 +68,14 @@ class WorkCarousel {
         this.autoplayInterval = null;
         this.touchStartX = 0;
         this.touchEndX = 0;
+        this.SWIPE_THRESHOLD = 50;
 
         // Select elements
         this.carousel = select('.work-carousel');
         this.cards = selectAll('.work-card');
         this.indicatorsContainer = select('.carousel-indicators');
 
-        if (!this.carousel || !this.cards.length) return;
+        if (!this.carousel || !this.cards.length || !this.indicatorsContainer) return;
 
         // Initialize carousel
         this.init();
@@ -87,7 +95,6 @@ class WorkCarousel {
     }
 
     createNavButtons() {
-        // Create prev/next buttons if they don't exist
         if (!select('.carousel-nav.prev')) {
             const prevButton = document.createElement('button');
             prevButton.className = 'carousel-nav prev';
@@ -113,25 +120,32 @@ class WorkCarousel {
             const indicator = document.createElement('button');
             indicator.className = `carousel-indicator ${index === 0 ? 'active' : ''}`;
             indicator.setAttribute('aria-label', `Go to slide ${index + 1}`);
+            indicator.setAttribute('aria-current', index === 0 ? 'true' : 'false');
             this.indicatorsContainer.appendChild(indicator);
         });
     }
 
     setupEventListeners() {
         // Navigation buttons
-        this.prevBtn?.addEventListener('click', () => this.prevSlide());
-        this.nextBtn?.addEventListener('click', () => this.nextSlide());
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+        }
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+        }
 
         // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (this.isElementInViewport(this.carousel)) {
+        document.addEventListener('keydown', async (e) => {
+            const isVisible = await this.isElementInViewport(this.carousel);
+            if (isVisible) {
                 if (e.key === 'ArrowLeft') this.prevSlide();
                 if (e.key === 'ArrowRight') this.nextSlide();
             }
         });
 
         // Indicators
-        selectAll('.carousel-indicator').forEach((indicator, index) => {
+        const indicators = selectAll('.carousel-indicator');
+        indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => this.goToSlide(index));
         });
 
@@ -145,7 +159,7 @@ class WorkCarousel {
             this.touchEndX = e.changedTouches[0].clientX;
             const diff = this.touchStartX - this.touchEndX;
 
-            if (Math.abs(diff) > 50) {
+            if (Math.abs(diff) > this.SWIPE_THRESHOLD) {
                 if (diff > 0) this.nextSlide();
                 else this.prevSlide();
             }
@@ -180,13 +194,15 @@ class WorkCarousel {
         const indicators = this.indicatorsContainer.children;
         indicators[this.currentIndex].classList.remove('active');
         indicators[index].classList.add('active');
+        indicators[this.currentIndex].setAttribute('aria-current', 'false');
+        indicators[index].setAttribute('aria-current', 'true');
 
         // Reset progress bar animation
-        const progressBar = this.cards[index].querySelector('.progress-bar::after');
+        const progressBar = this.cards[index].querySelector('.progress-bar');
         if (progressBar) {
-            progressBar.style.animation = 'none';
-            progressBar.offsetHeight; // Trigger reflow
-            progressBar.style.animation = null;
+            progressBar.classList.remove('active');
+            void progressBar.offsetWidth; // Trigger reflow
+            progressBar.classList.add('active');
         }
 
         this.currentIndex = index;
@@ -231,25 +247,34 @@ class WorkCarousel {
     }
 
     isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
+        return new Promise((resolve) => {
+            const observer = new IntersectionObserver(([entry]) => {
+                resolve(entry.isIntersecting);
+                observer.disconnect();
+            }, { threshold: 0.1 });
+            observer.observe(el);
+        });
     }
 }
 
 // Section fade-in animation
 const initSectionAnimation = () => {
     const sections = selectAll('section');
-    sections.forEach((section, index) => {
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.transition = 'opacity 0.5s ease';
+                    entry.target.style.opacity = '1';
+                }, index * 200);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
         section.style.opacity = '0';
-        setTimeout(() => {
-            section.style.transition = 'opacity 0.5s ease';
-            section.style.opacity = '1';
-        }, index * 200);
+        observer.observe(section);
     });
 };
 
