@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="assets/images/favicon_io/favicon-32x32.png" type="image/png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y49VGBY941"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y49VGBY941');
+      gtag('event', 'form_submission_complete', {
+          event_category: 'Contact Form',
+          event_label: 'Thank You Page Viewed'
+      });
+    </script>
 </head>
 <body>
     <main class="thank-you-page">
@@ -32,5 +44,8 @@
             </div>
         </section>
     </main>
+    <footer>
+        <p>© 2024 Godfred Prebbie Mensah. All rights reserved. | <a href="/privacy.html">Privacy Policy</a></p>
+    </footer>
 </body>
 </html>
