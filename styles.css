@@ -631,6 +631,386 @@ h3 {
 .contact-section {
   padding: var(--section-spacing) var(--container-padding);
   text-align: center;
+  background: var(--glass);
+  border-radius: var(--border-radius);
+  max-width: 1000px;
+  margin: 2rem auto 4rem; /* Increased bottom margin */
+}
+
+.contact-section h2 {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.contact-section form {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contact-section label {
+  font-size: 1rem;
+  color: var(--white);
+  text-align: left;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.contact-section input,
+.contact-section textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: var(--glass);
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.contact-section input:focus,
+.contact-section textarea:focus {
+  outline: none;
+  border-color: var(--gradient-3);
+  box-shadow: 0 0 8px rgba(35, 166, 213, 0.3);
+}
+
+.contact-section input:invalid,
+.contact-section textarea:invalid {
+  border-color: var(--gradient-2);
+}
+
+.contact-section textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.contact-section button.btn.primary {
+  background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+  color: var(--white);
+  border: none;
+  transition: var(--transition-smooth);
+}
+
+.contact-section button.btn.primary:hover {
+  background: linear-gradient(45deg, var(--gradient-2), var(--gradient-3));
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* File Upload Styling (commented out until Formspree plan upgrade) */
+/*
+.contact-section input[type="file"] {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: var(--glass);
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.contact-section input[type="file"]:focus {
+  outline: none;
+  border-color: var(--gradient-3);
+  box-shadow: 0 0 8px rgba(35, 166, 213, 0.3);
+}
+
+.contact-section input[type="file"]::-webkit-file-upload-button {
+  background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+  color: var(--white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.contact-section input[type="file"]::-webkit-file-upload-button:hover {
+  background: linear-gradient(45deg, var(--gradient-2), var(--gradient-3));
+  transform: translateY(-2px);
+}
+*/
+
+/* Mobile responsiveness for file upload (commented out until Formspree plan upgrade) */
+/*
+@media (max-width: 768px) {
+  .contact-section input[type="file"] {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .contact-section input[type="file"]::-webkit-file-upload-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+*/
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.5rem, 2vw, 2rem);
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(50px, 8vw, 60px);
+  height: clamp(50px, 8vw, 60px);
+  color: var(--white);
+  text-decoration: none;
+  background: var(--glass);
+  border-radius: 50%;
+  transition: var(--transition-smooth);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+.social-links a:hover {
+  transform: translateY(-3px);
+  background: var(--glass-hover);
+  color: var(--gradient-3);
+}
+
+.social-links a:focus {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+  background: var(--glass-hover);
+}
+
+.contact-section p {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: var(--white);
+  opacity: 0.9;
+  margin-top: 1rem;
+}
+
+.contact-section p a {
+  color: var(--white);
+  text-decoration: underline;
+  transition: var(--transition-smooth);
+}
+
+.contact-section p a:hover {
+  color: var(--gradient-3);
+}
+
+.contact-section p a:focus {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments for Contact Section */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: var(--section-spacing) clamp(1.5rem, 4vw, 2rem);
+    max-width: calc(100% - 2rem); /* Account for side margins */
+    margin: 2rem 1rem 3rem; /* Adjusted margins all around */
+  }
+
+  .contact-section h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+  }
+
+  .contact-section form {
+    max-width: 100%;
+  }
+
+  .contact-section input,
+  .contact-section textarea {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .contact-section button.btn.primary {
+    padding: 0.8rem 1.5rem;
+  }
+
+  .social-links {
+    gap: 1rem;
+  }
+
+  .social-links a {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .contact-section p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    margin: 1.5rem 1rem 2rem; /* Adjusted margins for mobile */
+    padding: var(--section-spacing) 1rem;
+  }
+
+  .social-links {
+    gap: 0.8rem;
+  }
+
+  .social-links a {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .contact-section input,
+  .contact-section textarea {
+    padding: 0.5rem;
+  }
+
+  .contact-section button.btn.primary {
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+/* Mobile responsiveness for file upload */
+@media (max-width: 768px) {
+  .contact-section input[type="file"] {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+  
+  .contact-section input[type="file"]::-webkit-file-upload-button,
+  .contact-section input[type="file"]::-moz-file-upload-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.5rem, 2vw, 2rem);
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(50px, 8vw, 60px);
+  height: clamp(50px, 8vw, 60px);
+  color: var(--white);
+  text-decoration: none;
+  background: var(--glass);
+  border-radius: 50%;
+  transition: var(--transition-smooth);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+.social-links a:hover {
+  transform: translateY(-3px);
+  background: var(--glass-hover);
+  color: var(--gradient-3);
+}
+
+.social-links a:focus {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+  background: var(--glass-hover);
+}
+
+.contact-section p {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: var(--white);
+  opacity: 0.9;
+  margin-top: 1rem;
+}
+
+.contact-section p a {
+  color: var(--white);
+  text-decoration: underline;
+  transition: var(--transition-smooth);
+}
+
+.contact-section p a:hover {
+  color: var (--gradient-3);
+}
+
+.contact-section p a:focus {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments for Contact Section */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: var(--section-spacing) 1rem;
+  }
+
+  .contact-section h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+  }
+
+  .contact-section form {
+    max-width: 100%;
+  }
+
+  .contact-section input,
+  .contact-section textarea {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .contact-section button.btn.primary {
+    padding: 0.8rem 1.5rem;
+  }
+
+  .social-links {
+    gap: 1rem;
+  }
+
+  .social-links a {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .contact-section p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-links {
+    gap: 0.8rem;
+  }
+
+  .social-links a {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .contact-section input,
+  .contact-section textarea {
+    padding: 0.5rem;
+  }
+
+  .contact-section button.btn.primary {
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+/* Contact Section */
+.contact-section {
+  padding: var(--section-spacing) var(--container-padding);
+  text-align: center;
 }
 
 .social-links {
@@ -660,12 +1040,140 @@ h3 {
   background: var(--glass-hover);
 }
 
+/* Thank You Page */
+.thank-you-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(-45deg, var(--gradient-1), var(--gradient-2), var(--gradient-3), var(--gradient-4));
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.thank-you-section {
+  padding: var(--section-spacing) var(--container-padding);
+  text-align: center;
+  background: var(--glass);
+  border-radius: var(--border-radius);
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.thank-you-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.thank-you-icon {
+  font-size: 4rem;
+  color: var(--gradient-3);
+  animation: bounceIn 0.8s ease;
+}
+
+.thank-you-section h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.thank-you-section p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--white);
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.thank-you-section .btn.primary {
+  background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+  color: var(--white);
+  padding: 0.8rem 2rem;
+  border: none;
+  transition: var(--transition-smooth);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.thank-you-section .btn.primary:hover {
+  background: linear-gradient(45deg, var(--gradient-2), var(--gradient-3));
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.thank-you-section .btn.primary .arrow-icon {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.thank-you-section .btn.primary:hover .arrow-icon {
+  transform: translateX(5px);
+}
+
+/* Animation for the checkmark icon */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments for Thank You Page */
+@media (max-width: 768px) {
+  .thank-you-section {
+    padding: var(--section-spacing) clamp(1.5rem, 4vw, 2rem);
+    max-width: calc(100% - 2rem);
+    margin: 0 1rem;
+  }
+
+  .thank-you-icon {
+    font-size: 3rem;
+  }
+
+  .thank-you-section h1 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .thank-you-section p {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+  }
+
+  .thank-you-section .btn.primary {
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .thank-you-icon {
+    font-size: 2.5rem;
+  }
+
+  .thank-you-section .btn.primary {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
 /* Footer */
 footer {
   text-align: center;
   padding: 2rem var(--container-padding);
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
+  margin-top: 0; /* Removed margin since contact section has bottom margin */
 }
 
 /* Animations */
