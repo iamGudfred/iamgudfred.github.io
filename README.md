@@ -35,7 +35,6 @@ Visit the live website: [Godfred Prebbie Mensah Portfolio](https://iamgudfred.gi
 - [LinkedIn](https://www.linkedin.com/in/godfred-prebbie-mensah/)
 - [GitHub](https://github.com/iamGudfred)
 - [Substack](https://gudfred.substack.com/)
-- [Twitter](https://twitter.com/iamGudfred)
 
 ## 📄 License
 
