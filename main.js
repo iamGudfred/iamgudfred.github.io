@@ -179,12 +179,33 @@ class WorkCarousel {
                 this.startAutoplay();
             }
         });
+
+        // Track project link clicks
+        this.cards.forEach(card => {
+            const link = card.querySelector('.work-link');
+            if (link) {
+                link.addEventListener('click', () => {
+                    const projectTitle = card.querySelector('h3').textContent;
+                    gtag('event', 'project_link_click', {
+                        event_category: 'Portfolio',
+                        event_label: projectTitle
+                    });
+                });
+            }
+        });
     }
 
     goToSlide(index) {
         if (this.isTransitioning || index === this.currentIndex) return;
 
         this.isTransitioning = true;
+
+        // Track carousel slide changes
+        gtag('event', 'carousel_slide', {
+            event_category: 'Carousel',
+            event_label: this.cards[index].querySelector('h3').textContent,
+            value: index + 1
+        });
 
         // Update cards
         this.cards[this.currentIndex].classList.remove('active');
@@ -287,6 +308,29 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize carousel
     const workCarousel = new WorkCarousel();
+
+    // Track form submissions
+    const contactForm = document.querySelector('form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', () => {
+            gtag('event', 'form_submission', {
+                event_category: 'Contact Form',
+                event_label: 'Message Sent'
+            });
+        });
+    }
+
+    // Track social link clicks
+    const socialLinks = document.querySelectorAll('.social-links a');
+    socialLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const platform = link.getAttribute('aria-label').replace(' Profile', '');
+            gtag('event', 'social_click', {
+                event_category: 'Social Media',
+                event_label: platform
+            });
+        });
+    });
 });
 
 // Handle page visibility
