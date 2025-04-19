@@ -9,8 +9,8 @@
     
     <meta property="og:title" content="Godfred Prebbie Mensah - Portfolio">
     <meta property="og:description" content="Lifelong Learner passionate about HR Analytics and Technology, building data-driven workplaces with digital solutions and design.">
-    <meta property="og:image" content="[Your Profile Image URL]">
-    <meta property="og:url" content="[Your Website URL]">
+    <meta property="og:image" content="https://iamgudfred.github.io/assets/images/fred.JPG">
+    <meta property="og:url" content="https://iamgudfred.github.io">
     
     <!-- Commented out Twitter Card meta tags for future adjustments -->
     <!--
@@ -21,7 +21,7 @@
     <meta name="twitter:image" content="[Your Profile Image URL]">
     -->
     
-    <link rel="canonical" href="[Your Website URL]">
+    <link rel="canonical" href="https://iamgudfred.github.io">
     <meta name="robots" content="index, follow">
     <title>Godfred Prebbie Mensah - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -252,18 +252,51 @@
 
         <section id="contact" class="contact-section">
             <h2>Let's Connect</h2>
+            <form action="https://formspree.io/f/mdkeqevz" method="POST">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                
+                <!-- File upload feature commented out until Formspree paid plan -->
+                <!-- <label for="upload">Attach a File (optional):</label> -->
+                <!-- <input type="file" id="upload" name="upload"> -->
+                
+                <!-- Spam protection -->
+                <input type="text" name="_gotcha" style="display: none;">
+                
+                <!-- Success page redirect -->
+                <input type="hidden" name="_next" value="https://iamgudfred.github.io/thank-you.html">
+                
+                <button type="submit" class="btn primary">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+            
             <div class="social-links">
-                <a href="https://linkedin.com/in/godfred-prebbie-mensah/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/iamGudfred" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://stackoverflow.com/users/19276275" target="_blank"><i class="fab fa-stack-overflow"></i></a>
-                <a href="https://gudfred.substack.com/" target="_blank"><i class="fas fa-newspaper"></i></a>
-                <!-- Commented out social links for future adjustments -->
-                <!--
-                <a href="https://x.com/iamGudfred" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="mailto:gprebbiemensah@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="https://instagram.com/iamgudfred" target="_blank"><i class="fab fa-instagram"></i></a>
-                -->
+                <a href="https://linkedin.com/in/godfred-prebbie-mensah/" target="_blank" aria-label="LinkedIn Profile">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/iamGudfred" target="_blank" aria-label="GitHub Profile">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://stackoverflow.com/users/19276275" target="_blank" aria-label="Stack Overflow Profile">
+                    <i class="fab fa-stack-overflow"></i>
+                </a>
+                <a href="https://gudfred.substack.com/" target="_blank" aria-label="Substack Newsletter">
+                    <i class="fas fa-newspaper"></i>
+                </a>
+                <a href="javascript:void(0)" onclick="window.location.href='mailto:' + 'gprebbiemensah' + '@' + 'gmail.com';" aria-label="Email Contact">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
+            
+            <p>Prefer to chat professionally? Reach out on <a href="https://linkedin.com/in/godfred-prebbie-mensah/" target="_blank">LinkedIn</a>.</p>
         </section>
     </main>
 
