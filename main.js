@@ -1,345 +1,86 @@
-// Utility functions
-const select = (selector) => document.querySelector(selector);
-const selectAll = (selector) => document.querySelectorAll(selector);
+// ============================================================
+//  main.js  -  site behavior for iamgudfred.github.io
+//  - year stamp
+//  - mobile menu toggle
+//  - scroll-reveal animations
+//  - email obfuscation (bot-resistant mailto)
+//  - Google Analytics event tracking (form, social, project links)
+// ============================================================
 
-// Smooth scrolling
-const initSmoothScroll = () => {
-    const anchors = selectAll('a[href^="#"]');
-    anchors.forEach(anchor => {
-        anchor.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = anchor.getAttribute('href');
-            const target = select(targetId);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-                // Close mobile menu if open
-                const navLinks = select('.nav-links');
-                const mobileMenu = select('.mobile-menu');
-                if (navLinks && navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-                if (mobileMenu && mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                }
-            }
-        });
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ---- Year stamp ----
+  var yr = document.getElementById('yr');
+  if (yr) { yr.textContent = new Date().getFullYear(); }
+
+  // ---- Email obfuscation ----
+  // Assemble the address from parts so scrapers never see a clean string.
+  // Real visitors get a working click-to-email link and can see/copy it.
+  (function () {
+    var user = 'gprebbiemensah';
+    var domain = 'gmail' + '.' + 'com';
+    var addr = user + '\u0040' + domain; // \u0040 is "@"
+    var link = document.getElementById('emailLink');
+    var text = document.getElementById('emailText');
+    if (link) { link.href = 'mailto:' + addr; }
+    if (text) { text.textContent = addr; }
+  })();
+
+  // ---- Mobile menu toggle ----
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener('click', function () {
+      navLinks.classList.toggle('open');
     });
-};
-
-// Navbar scroll behavior
-const initNavbar = () => {
-    const navbar = select('.navbar');
-    if (!navbar) return;
-
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.scrollY;
-        if (currentScroll > 50) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.2)';
-            navbar.style.backdropFilter = 'blur(10px)';
-        } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.1)';
-            navbar.style.backdropFilter = 'blur(10px)';
-        }
-        lastScroll = currentScroll;
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { navLinks.classList.remove('open'); });
     });
-};
+  }
 
-// Mobile menu
-const initMobileMenu = () => {
-    const mobileMenu = select('.mobile-menu');
-    const navLinks = select('.nav-links');
-
-    if (mobileMenu && navLinks) {
-        mobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            document.body.classList.toggle('no-scroll');
-        });
-    }
-};
-
-// Enhanced Work Carousel
-class WorkCarousel {
-    constructor() {
-        // Initialize properties
-        this.currentIndex = 0;
-        this.isTransitioning = false;
-        this.autoplayInterval = null;
-        this.touchStartX = 0;
-        this.touchEndX = 0;
-        this.SWIPE_THRESHOLD = 50;
-
-        // Select elements
-        this.carousel = select('.work-carousel');
-        this.cards = selectAll('.work-card');
-        this.indicatorsContainer = select('.carousel-indicators');
-
-        if (!this.carousel || !this.cards.length || !this.indicatorsContainer) return;
-
-        // Initialize carousel
-        this.init();
-    }
-
-    init() {
-        // Create navigation buttons
-        this.createNavButtons();
-        // Create indicators
-        this.createIndicators();
-        // Set up event listeners
-        this.setupEventListeners();
-        // Start autoplay
-        this.startAutoplay();
-        // Preload images
-        this.preloadImages();
-    }
-
-    createNavButtons() {
-        if (!select('.carousel-nav.prev')) {
-            const prevButton = document.createElement('button');
-            prevButton.className = 'carousel-nav prev';
-            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-            prevButton.setAttribute('aria-label', 'Previous project');
-            this.carousel.appendChild(prevButton);
-        }
-
-        if (!select('.carousel-nav.next')) {
-            const nextButton = document.createElement('button');
-            nextButton.className = 'carousel-nav next';
-            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-            nextButton.setAttribute('aria-label', 'Next project');
-            this.carousel.appendChild(nextButton);
-        }
-
-        this.prevBtn = select('.carousel-nav.prev');
-        this.nextBtn = select('.carousel-nav.next');
-    }
-
-    createIndicators() {
-        this.cards.forEach((_, index) => {
-            const indicator = document.createElement('button');
-            indicator.className = `carousel-indicator ${index === 0 ? 'active' : ''}`;
-            indicator.setAttribute('aria-label', `Go to slide ${index + 1}`);
-            indicator.setAttribute('aria-current', index === 0 ? 'true' : 'false');
-            this.indicatorsContainer.appendChild(indicator);
-        });
-    }
-
-    setupEventListeners() {
-        // Navigation buttons
-        if (this.prevBtn) {
-            this.prevBtn.addEventListener('click', () => this.prevSlide());
-        }
-        if (this.nextBtn) {
-            this.nextBtn.addEventListener('click', () => this.nextSlide());
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', async (e) => {
-            const isVisible = await this.isElementInViewport(this.carousel);
-            if (isVisible) {
-                if (e.key === 'ArrowLeft') this.prevSlide();
-                if (e.key === 'ArrowRight') this.nextSlide();
-            }
-        });
-
-        // Indicators
-        const indicators = selectAll('.carousel-indicator');
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => this.goToSlide(index));
-        });
-
-        // Touch events
-        this.carousel.addEventListener('touchstart', (e) => {
-            this.touchStartX = e.touches[0].clientX;
-            this.pauseAutoplay();
-        }, { passive: true });
-
-        this.carousel.addEventListener('touchend', (e) => {
-            this.touchEndX = e.changedTouches[0].clientX;
-            const diff = this.touchStartX - this.touchEndX;
-
-            if (Math.abs(diff) > this.SWIPE_THRESHOLD) {
-                if (diff > 0) this.nextSlide();
-                else this.prevSlide();
-            }
-
-            this.startAutoplay();
-        }, { passive: true });
-
-        // Pause autoplay on hover
-        this.carousel.addEventListener('mouseenter', () => this.pauseAutoplay());
-        this.carousel.addEventListener('mouseleave', () => this.startAutoplay());
-
-        // Visibility change
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                this.pauseAutoplay();
-            } else {
-                this.startAutoplay();
-            }
-        });
-
-        // Track project link clicks
-        this.cards.forEach(card => {
-            const link = card.querySelector('.work-link');
-            if (link) {
-                link.addEventListener('click', () => {
-                    const projectTitle = card.querySelector('h3').textContent;
-                    gtag('event', 'project_link_click', {
-                        event_category: 'Portfolio',
-                        event_label: projectTitle
-                    });
-                });
-            }
-        });
-    }
-
-    goToSlide(index) {
-        if (this.isTransitioning || index === this.currentIndex) return;
-
-        this.isTransitioning = true;
-
-        // Track carousel slide changes
-        gtag('event', 'carousel_slide', {
-            event_category: 'Carousel',
-            event_label: this.cards[index].querySelector('h3').textContent,
-            value: index + 1
-        });
-
-        // Update cards
-        this.cards[this.currentIndex].classList.remove('active');
-        this.cards[index].classList.add('active');
-
-        // Update indicators
-        const indicators = this.indicatorsContainer.children;
-        indicators[this.currentIndex].classList.remove('active');
-        indicators[index].classList.add('active');
-        indicators[this.currentIndex].setAttribute('aria-current', 'false');
-        indicators[index].setAttribute('aria-current', 'true');
-
-        // Reset progress bar animation
-        const progressBar = this.cards[index].querySelector('.progress-bar');
-        if (progressBar) {
-            progressBar.classList.remove('active');
-            void progressBar.offsetWidth; // Trigger reflow
-            progressBar.classList.add('active');
-        }
-
-        this.currentIndex = index;
-
-        setTimeout(() => {
-            this.isTransitioning = false;
-        }, 600);
-    }
-
-    nextSlide() {
-        if (this.isTransitioning) return;
-        const nextIndex = (this.currentIndex + 1) % this.cards.length;
-        this.goToSlide(nextIndex);
-    }
-
-    prevSlide() {
-        if (this.isTransitioning) return;
-        const prevIndex = (this.currentIndex - 1 + this.cards.length) % this.cards.length;
-        this.goToSlide(prevIndex);
-    }
-
-    startAutoplay() {
-        this.pauseAutoplay();
-        this.autoplayInterval = setInterval(() => this.nextSlide(), 5000);
-    }
-
-    pauseAutoplay() {
-        if (this.autoplayInterval) {
-            clearInterval(this.autoplayInterval);
-            this.autoplayInterval = null;
-        }
-    }
-
-    preloadImages() {
-        this.cards.forEach(card => {
-            const img = card.querySelector('img');
-            if (img && img.src) {
-                const preloadImg = new Image();
-                preloadImg.src = img.src;
-            }
-        });
-    }
-
-    isElementInViewport(el) {
-        return new Promise((resolve) => {
-            const observer = new IntersectionObserver(([entry]) => {
-                resolve(entry.isIntersecting);
-                observer.disconnect();
-            }, { threshold: 0.1 });
-            observer.observe(el);
-        });
-    }
-}
-
-// Section fade-in animation
-const initSectionAnimation = () => {
-    const sections = selectAll('section');
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.transition = 'opacity 0.5s ease';
-                    entry.target.style.opacity = '1';
-                }, index * 200);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        observer.observe(section);
+  // ---- Scroll-reveal animations ----
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     });
-};
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initSmoothScroll();
-    initNavbar();
-    initMobileMenu();
-    initSectionAnimation();
-    
-    // Initialize carousel
-    const workCarousel = new WorkCarousel();
-
-    // Track form submissions
-    const contactForm = document.querySelector('form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', () => {
-            gtag('event', 'form_submission', {
-                event_category: 'Contact Form',
-                event_label: 'Message Sent'
-            });
-        });
-    }
-
-    // Track social link clicks
-    const socialLinks = document.querySelectorAll('.social-links a');
-    socialLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            const platform = link.getAttribute('aria-label').replace(' Profile', '');
-            gtag('event', 'social_click', {
-                event_category: 'Social Media',
-                event_label: platform
-            });
-        });
+  // ---- Analytics: contact form submission ----
+  var contactForm = document.querySelector('form');
+  if (contactForm && typeof gtag === 'function') {
+    contactForm.addEventListener('submit', function () {
+      gtag('event', 'form_submission', {
+        event_category: 'Contact Form',
+        event_label: 'Message Sent'
+      });
     });
+  }
+
+  // ---- Analytics: social link clicks ----
+  if (typeof gtag === 'function') {
+    document.querySelectorAll('.social-links a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var label = link.getAttribute('aria-label') || 'Social';
+        gtag('event', 'social_click', {
+          event_category: 'Social Media',
+          event_label: label
+        });
+      });
+    });
+
+    // ---- Analytics: project link clicks (work cards) ----
+    document.querySelectorAll('.work-card .work-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var card = link.closest('.work-card');
+        var h3 = card ? card.querySelector('h3') : null;
+        gtag('event', 'project_link_click', {
+          event_category: 'Portfolio',
+          event_label: h3 ? h3.textContent.trim() : 'Project'
+        });
+      });
+    });
+  }
+
 });
-
-// Handle page visibility
-document.addEventListener('visibilitychange', () => {
-    const workCards = selectAll('.work-card');
-    if (document.hidden) {
-        workCards.forEach(card => {
-            const img = card.querySelector('img');
-            if (img) img.loading = 'lazy';
-        });
-    }
 });
