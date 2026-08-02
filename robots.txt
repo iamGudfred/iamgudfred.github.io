@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: [Your Website URL]/sitemap.xml
+Disallow: /thank-you.html
+
+Sitemap: https://iamgudfred.github.io/sitemap.xml
