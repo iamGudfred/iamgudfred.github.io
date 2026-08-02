@@ -1,12 +1,9 @@
 // ============================================================
 //  main.js  -  site behavior for iamgudfred.github.io
-//  - year stamp
-//  - mobile menu toggle
-//  - scroll-reveal animations
-//  - email obfuscation (bot-resistant mailto)
-//  - Google Analytics event tracking (form, social, project links)
 // ============================================================
+
 document.documentElement.classList.add('js');
+
 document.addEventListener('DOMContentLoaded', function () {
 
   // ---- Year stamp ----
@@ -14,17 +11,24 @@ document.addEventListener('DOMContentLoaded', function () {
   if (yr) { yr.textContent = new Date().getFullYear(); }
 
   // ---- Email obfuscation ----
-  // Assemble the address from parts so scrapers never see a clean string.
-  // Real visitors get a working click-to-email link and can see/copy it.
   (function () {
     var user = 'gprebbiemensah';
     var domain = 'gmail' + '.' + 'com';
     var addr = user + '\u0040' + domain; // \u0040 is "@"
     var link = document.getElementById('emailLink');
     var text = document.getElementById('emailText');
+    var circle = document.getElementById('emailCircle');
     if (link) { link.href = 'mailto:' + addr; }
     if (text) { text.textContent = addr; }
+    if (circle) { circle.href = 'mailto:' + addr; }
   })();
+
+  // ---- Mild image save-deterrent (portrait) ----
+  var portrait = document.querySelector('.hero-portrait img');
+  if (portrait) {
+    portrait.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    portrait.addEventListener('dragstart', function (e) { e.preventDefault(); });
+  }
 
   // ---- Mobile menu toggle ----
   var menuBtn = document.getElementById('menuBtn');
@@ -57,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---- Analytics: social link clicks ----
+  // ---- Analytics: social + project link clicks ----
   if (typeof gtag === 'function') {
     document.querySelectorAll('.social-links a').forEach(function (link) {
       link.addEventListener('click', function () {
@@ -68,8 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
     });
-
-    // ---- Analytics: project link clicks (work cards) ----
     document.querySelectorAll('.work-card .work-link').forEach(function (link) {
       link.addEventListener('click', function () {
         var card = link.closest('.work-card');
