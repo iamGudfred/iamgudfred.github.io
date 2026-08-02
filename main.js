@@ -6,7 +6,7 @@
 //  - email obfuscation (bot-resistant mailto)
 //  - Google Analytics event tracking (form, social, project links)
 // ============================================================
-
+document.documentElement.classList.add('js');
 document.addEventListener('DOMContentLoaded', function () {
 
   // ---- Year stamp ----
