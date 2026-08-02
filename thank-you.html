@@ -1,51 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Thank you for contacting Godfred Prebbie Mensah">
-    <title>Thank You - Message Received</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Add Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="assets/images/favicon_io/favicon-32x32.png" type="image/png">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y49VGBY941"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y49VGBY941');
-      gtag('event', 'form_submission_complete', {
-          event_category: 'Contact Form',
-          event_label: 'Thank You Page Viewed'
-      });
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>Message sent - Godfred Prebbie Mensah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="icon" href="assets/images/favicon_io/favicon-32x32.png" type="image/png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y49VGBY941"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y49VGBY941');
+  gtag('event', 'form_submission_complete', {
+      event_category: 'Contact Form',
+      event_label: 'Thank You Page Viewed'
+  });
+</script>
+<style>
+:root{
+  --ink:#0B1B2B;--ink-2:#12314b;--paper:#F7F5F0;--amber:#E08A3C;
+  --amber-deep:#C46F26;--muted:#5A6B7B;--line:#DAD4C8;--line-dark:#22415f;--white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter',system-ui,sans-serif;color:var(--paper);
+  background:var(--ink);min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;-webkit-font-smoothing:antialiased;text-align:center;
+}
+.card{max-width:520px}
+.badge{
+  width:76px;height:76px;border-radius:50%;
+  background:var(--amber);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.9rem;margin:0 auto 30px;
+  animation:pop .5s ease;
+}
+@keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--amber);display:inline-flex;align-items:center;gap:.6em;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--amber);display:inline-block}
+h1{
+  font-family:'Fraunces',Georgia,serif;font-weight:500;
+  font-size:clamp(2rem,5vw,2.8rem);letter-spacing:-.02em;
+  margin:16px 0 14px;line-height:1.1;color:var(--white);
+}
+h1 .accent{font-style:italic;color:var(--amber)}
+p{color:#c6d3df;font-size:1.05rem;max-width:40ch;margin:0 auto 32px}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-weight:600;font-size:.95rem;padding:13px 24px;border-radius:100px;
+  background:var(--amber);color:var(--ink);border:0;cursor:pointer;
+  transition:background .2s,color .2s,transform .15s ease;text-decoration:none;
+}
+.btn:hover{background:var(--amber-deep);color:var(--white);transform:translateY(-2px)}
+.small{margin-top:22px;font-size:.85rem;color:#8ea4b8}
+.small a{color:#c6d3df}
+@media(prefers-reduced-motion:reduce){.badge{animation:none}}
+.site-footer{
+  position:fixed;bottom:0;left:0;right:0;
+  padding:18px;text-align:center;font-size:.8rem;color:#7a8ea1;
+  border-top:1px solid var(--line-dark);
+}
+.site-footer a{color:#7a8ea1;text-decoration:underline}
+</style>
 </head>
 <body>
-    <main class="thank-you-page">
-        <section class="section thank-you-section">
-            <div class="container">
-                <div class="thank-you-content">
-                    <!-- Checkmark Icon -->
-                    <i class="fas fa-check-circle thank-you-icon"></i>
-                    <h1>Thank You!</h1>
-                    <p>Your message has been received. I'll get back to you as soon as possible.</p>
-                    <div class="cta-buttons">
-                        <a href="/" class="btn primary">
-                            <span>Return Home</span>
-                            <i class="fas fa-arrow-right arrow-icon"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>© 2024 Godfred Prebbie Mensah. All rights reserved. | <a href="/privacy.html">Privacy Policy</a></p>
-    </footer>
+  <div class="card">
+    <div class="badge"><i class="fas fa-check"></i></div>
+    <span class="eyebrow">Message sent</span>
+    <h1>Thanks, it's <span class="accent">on its way.</span></h1>
+    <p>Your message has landed in my inbox. I read everything and will get back to you as soon as I can.</p>
+    <a href="/" class="btn"><i class="fas fa-arrow-left"></i> Back to the site</a>
+    <p class="small">In the meantime, find me on <a href="https://linkedin.com/in/godfred-prebbie-mensah" target="_blank" rel="noopener">LinkedIn</a>.</p>
+  </div>
+  <footer class="site-footer">
+    &copy; <span id="yr"></span> Godfred Prebbie Mensah &middot; <a href="/privacy.html">Privacy Policy</a>
+  </footer>
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>
+</html>
 </html>
