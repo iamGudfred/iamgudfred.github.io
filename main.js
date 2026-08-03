@@ -9,10 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var domain = 'gmail' + '.' + 'com';
   var addr = user + '\u0040' + domain;
   var link = document.getElementById('emailLink');
-  var text = document.getElementById('emailText');
   var circle = document.getElementById('emailCircle');
   if (link) { link.href = 'mailto:' + addr; }
-  if (text) { text.textContent = addr; }
   if (circle) { circle.href = 'mailto:' + addr; }
 
   var portrait = document.querySelector('.hero-portrait img');
