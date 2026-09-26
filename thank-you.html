@@ -7,7 +7,7 @@
 <title>Message sent - Godfred Prebbie Mensah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link rel="icon" href="assets/images/favicon_io/favicon-32x32.png" type="image/png">
 <!-- Google tag (gtag.js) -->
@@ -24,8 +24,8 @@
 </script>
 <style>
 :root{
-  --ink:#0B1B2B;--ink-2:#12314b;--paper:#F7F5F0;--amber:#E08A3C;
-  --amber-deep:#C46F26;--muted:#5A6B7B;--line:#DAD4C8;--line-dark:#22415f;--white:#fff;
+  --ink:#15140F;--paper:#F2EEE3;--signal:#B3401C;
+  --signal-deep:#8A3013;--muted:#6E6656;--line-dark:#3a3527;--white:#fff;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -36,41 +36,41 @@ body{
 }
 .card{max-width:520px}
 .badge{
-  width:76px;height:76px;border-radius:50%;
-  background:var(--amber);color:var(--ink);
+  width:64px;height:64px;border-radius:0;
+  background:var(--signal);color:var(--white);border:1px solid var(--signal);
   display:flex;align-items:center;justify-content:center;
-  font-size:1.9rem;margin:0 auto 30px;
-  animation:pop .5s ease;
+  font-size:1.6rem;margin:0 auto 28px;
+  animation:pop .4s ease;
 }
-@keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes pop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
 .eyebrow{
-  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--amber);display:inline-flex;align-items:center;gap:.6em;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--signal);display:inline-flex;align-items:center;gap:.7em;
 }
-.eyebrow::before{content:"";width:26px;height:1px;background:var(--amber);display:inline-block}
+.eyebrow::before{content:"//";color:#8a8168}
 h1{
-  font-family:'Fraunces',Georgia,serif;font-weight:500;
-  font-size:clamp(2rem,5vw,2.8rem);letter-spacing:-.02em;
+  font-family:'Space Grotesk',system-ui,sans-serif;font-weight:600;
+  font-size:clamp(2rem,5vw,2.6rem);letter-spacing:-.02em;
   margin:16px 0 14px;line-height:1.1;color:var(--white);
 }
-h1 .accent{font-style:italic;color:var(--amber)}
-p{color:#c6d3df;font-size:1.05rem;max-width:40ch;margin:0 auto 32px}
+h1 .accent{color:var(--signal)}
+p{color:#c2b9a3;font-size:1.02rem;max-width:40ch;margin:0 auto 32px}
 .btn{
   display:inline-flex;align-items:center;gap:9px;
-  font-weight:600;font-size:.95rem;padding:13px 24px;border-radius:100px;
-  background:var(--amber);color:var(--ink);border:0;cursor:pointer;
-  transition:background .2s,color .2s,transform .15s ease;text-decoration:none;
+  font-weight:600;font-size:.9rem;padding:13px 22px;border-radius:0;
+  background:var(--signal);color:var(--white);border:1px solid var(--signal);cursor:pointer;
+  transition:background .15s,border-color .15s;text-decoration:none;
 }
-.btn:hover{background:var(--amber-deep);color:var(--white);transform:translateY(-2px)}
-.small{margin-top:22px;font-size:.85rem;color:#8ea4b8}
-.small a{color:#c6d3df}
+.btn:hover{background:var(--signal-deep);border-color:var(--signal-deep)}
+.small{margin-top:22px;font-size:.84rem;color:#8a8168}
+.small a{color:#c2b9a3}
 @media(prefers-reduced-motion:reduce){.badge{animation:none}}
 .site-footer{
   position:fixed;bottom:0;left:0;right:0;
-  padding:18px;text-align:center;font-size:.8rem;color:#7a8ea1;
-  border-top:1px solid var(--line-dark);
+  padding:18px;text-align:center;font-size:.8rem;color:#8a8168;
+  border-top:1px solid var(--line-dark);font-family:'IBM Plex Mono',monospace;
 }
-.site-footer a{color:#7a8ea1;text-decoration:underline}
+.site-footer a{color:#8a8168;text-decoration:underline}
 </style>
 </head>
 <body>

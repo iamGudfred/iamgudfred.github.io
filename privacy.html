@@ -7,7 +7,7 @@
 <title>Privacy Policy - Godfred Prebbie Mensah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <link rel="icon" href="assets/images/favicon_io/favicon-32x32.png" type="image/png">
 <!-- Google tag (gtag.js) -->
@@ -25,8 +25,8 @@
 </script>
 <style>
 :root{
-  --ink:#0B1B2B;--ink-2:#12314b;--paper:#F7F5F0;--paper-2:#EFEBE3;
-  --amber:#E08A3C;--amber-deep:#A85A18;--muted:#5A6B7B;--line:#DAD4C8;--white:#fff;
+  --ink:#15140F;--paper:#F2EEE3;
+  --signal:#B3401C;--signal-deep:#8A3013;--muted:#6E6656;--line:#CBC2A9;--white:#fff;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -35,45 +35,47 @@ body{
   min-height:100vh;display:flex;flex-direction:column;
 }
 .wrap{max-width:720px;margin:0 auto;padding:0 24px;width:100%}
-.topbar{border-bottom:1px solid var(--line);padding:18px 0}
+.topbar{border-bottom:1px solid var(--ink);padding:18px 0}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem}
-.logo b{color:var(--amber-deep)}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem}
+.logo b{color:var(--signal)}
 .back{
-  font-size:.9rem;font-weight:600;color:var(--muted);
-  display:inline-flex;align-items:center;gap:7px;transition:color .2s;
+  font-size:.88rem;font-weight:600;color:var(--muted);
+  display:inline-flex;align-items:center;gap:7px;transition:color .15s;
+  font-family:'IBM Plex Mono',monospace;
 }
 .back:hover{color:var(--ink)}
 a{color:inherit;text-decoration:none}
-main{flex:1;padding:64px 0}
+main{flex:1;padding:60px 0}
 .eyebrow{
-  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--amber-deep);display:inline-flex;align-items:center;gap:.6em;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--signal-deep);display:inline-flex;align-items:center;gap:.7em;
 }
-.eyebrow::before{content:"";width:26px;height:1px;background:var(--amber);display:inline-block}
+.eyebrow::before{content:"//";color:var(--signal)}
 h1{
-  font-family:'Fraunces',Georgia,serif;font-weight:500;
-  font-size:clamp(2rem,5vw,2.9rem);letter-spacing:-.02em;
+  font-family:'Space Grotesk',system-ui,sans-serif;font-weight:600;
+  font-size:clamp(2rem,5vw,2.7rem);letter-spacing:-.02em;
   margin:16px 0 28px;line-height:1.1;
 }
-.policy p{font-size:1.05rem;color:var(--ink);margin-bottom:20px}
+.policy p{font-size:1.02rem;color:var(--ink);margin-bottom:20px}
 .policy p.muted{color:var(--muted)}
-.policy a{color:var(--amber-deep);text-decoration:underline;text-underline-offset:2px}
+.policy a{color:var(--signal-deep);text-decoration:underline;text-underline-offset:2px}
 .policy a:hover{color:var(--ink)}
 .updated{
-  font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);
-  margin-bottom:36px;letter-spacing:.02em;
+  font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--muted);
+  margin-bottom:34px;letter-spacing:.02em;
 }
 .btn{
-  display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.95rem;
-  padding:13px 22px;border-radius:100px;background:var(--ink);color:var(--paper);
-  transition:background .2s,transform .15s ease;margin-top:12px;
+  display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.9rem;
+  padding:13px 20px;border-radius:0;border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  transition:background .15s,border-color .15s;margin-top:12px;
 }
-.btn:hover{background:var(--ink-2);transform:translateY(-2px)}
+.btn:hover{background:var(--signal-deep);border-color:var(--signal-deep)}
 footer{
-  background:var(--ink);color:#8ea4b8;padding:24px 0;text-align:center;font-size:.85rem;
+  background:var(--ink);color:#8a8168;padding:22px 0;text-align:center;font-size:.82rem;
+  font-family:'IBM Plex Mono',monospace;
 }
-footer a{color:#8ea4b8;text-decoration:underline}
+footer a{color:#8a8168;text-decoration:underline}
 </style>
 </head>
 <body>
